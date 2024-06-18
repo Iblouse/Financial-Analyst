@@ -1,29 +1,41 @@
-```markdown
 # Financial Trading Crew Application
 
+![Project Logo](assets/logo.png)
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+  - [File Descriptions](#file-descriptions)
+- [Setup Instructions](#setup-instructions)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
+  - [Running the Application](#running-the-application)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
 
 ## Overview
 
-The Financial Trading Crew Application is a powerful tool designed for financial analysts and traders to automate and optimize their trading strategies. This application uses a team of specialized agents that monitor and analyze market data, develop trading strategies, plan trade execution, and assess associated risks. Leveraging `crewai`, `streamlit`, and `openai`, it provides an interactive and efficient trading solution.
+The Financial Trading Crew Application is a tool designed for financial analysts and traders to automate and optimize their trading strategies. This application uses a team of specialized agents that monitor and analyze market data, develop trading strategies, plan trade execution, and assess associated risks. Leveraging `crewai`, `streamlit`, and `openai`, it provides an interactive and efficient trading solution.
 
 ## Features
 
-- **Real-time Market Data Analysis**: Continuously monitors and analyzes market data for trend identification and market movement prediction.
-- **Automated Trading Strategy Development**: Develops and tests various trading strategies based on real-time data analysis.
+- **Automated Trading Strategy Development**: Develops and tests various trading strategies based on the index data analysis.
 - **Trade Execution Planning**: Optimizes trade execution strategies based on current market conditions and strategy parameters.
 - **Comprehensive Risk Assessment**: Evaluates potential risks associated with trading activities and suggests mitigation strategies.
 - **Interactive User Interface**: Allows users to set parameters and view results through an easy-to-use Streamlit application.
 
 ## Project Structure
 
+
 ```
-.
-├── app.py                # Main Streamlit application code
+├── financial_analyst_app.py                # Main Streamlit application code
 ├── util.py               # Utility functions and helper methods
 ├── requirements.txt      # Python dependencies
 ├── README.md             # Project documentation
 ├── .env.example          # Example of environment variables file
-├── .gitignore            # Git ignore rules
+└── .gitignore            # Git ignore rules
 
 ```
 
@@ -51,7 +63,7 @@ Follow these steps to set up and run the Financial Trading Crew Application on y
 1. **Clone the Repository**:
     ```bash
     git clone https://github.com/iblouse/Financial-Analyst.git
-    cd financial-trading-crew-app
+    cd Financial-Analyst
     ```
 
 2. **Create a Virtual Environment**:
@@ -83,15 +95,6 @@ Follow these steps to set up and run the Financial Trading Crew Application on y
 - Set parameters like stock selection, initial capital, risk tolerance, and trading strategy preference.
 - Click "Run Trading Crew" to execute the financial trading crew and see the results.
 
-## Contributing
-
-We welcome contributions from the community! To contribute:
-
-1. Fork the repository.
-2. Create a new feature branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Create a new Pull Request.
 
 ## License
 
@@ -101,9 +104,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Special thanks to the `crewai` and `openai` teams for their incredible tools and APIs.
 
-
 ---
 
 Happy Trading! 🚀
-```
-
