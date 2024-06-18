@@ -1,7 +1,5 @@
 # Financial Trading Crew Application
 
-![Project Logo](assets/logo.png)
-
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
