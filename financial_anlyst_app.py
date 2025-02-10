@@ -1,11 +1,21 @@
 # Import necessary libraries
 import streamlit as st
 import os
-from crewai import Agent, Task, Crew, Process  # Ensure Process is imported
-from utils import get_openai_api_key, get_serper_api_key  # Import utility functions
-from crewai_tools import ScrapeWebsiteTool, SerperDevTool  # Import specific tools
-from langchain_openai import ChatOpenAI  # Import the language model interface
-from dotenv import load_dotenv, find_dotenv  # Import environment management tools
+import warnings
+
+# Suppress SyntaxWarnings from third-party libraries
+warnings.filterwarnings("ignore", category=SyntaxWarning)
+
+try:
+    # Import custom modules with improved error handling
+    from crewai import Agent, Task, Crew, Process  # Ensure Process is imported
+    from crewai_tools import ScrapeWebsiteTool, SerperDevTool
+    from langchain_openai import ChatOpenAI
+    from dotenv import load_dotenv, find_dotenv
+    from utils import get_openai_api_key, get_serper_api_key  # Import utility functions
+except ImportError as e:
+    st.error(f"Error importing a required module: {e}")
+    st.stop()
 
 # Streamlit app title
 st.title("Financial Trading Crew Application")
@@ -19,8 +29,8 @@ os.environ["OPENAI_MODEL_NAME"] = 'gpt-3.5-turbo'
 os.environ["SERPER_API_KEY"] = get_serper_api_key()
 
 # Define tools for the agents
-search_tool = SerperDevTool()  # Tool for searching data
-scrape_tool = ScrapeWebsiteTool()  # Tool for scraping websites
+search_tool = SerperDevTool()
+scrape_tool = ScrapeWebsiteTool()
 
 # Define the Data Analyst agent
 data_analyst_agent = Agent(
@@ -31,7 +41,7 @@ data_analyst_agent = Agent(
                  for informing trading decisions.""",
     verbose=True,
     allow_delegation=True,
-    tools=[scrape_tool, search_tool]  # Assign tools to the agent
+    tools=[scrape_tool, search_tool]
 )
 
 # Define the Trading Strategy Developer agent
@@ -112,20 +122,20 @@ risk_assessment_task = Task(
 financial_trading_crew = Crew(
     agents=[data_analyst_agent, trading_strategy_agent, execution_agent, risk_management_agent],
     tasks=[data_analysis_task, strategy_development_task, execution_planning_task, risk_assessment_task],
-    manager_llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7),  # Specify the language model to manage the crew
-    process=Process.hierarchical,  # Set the process type
-    verbose=True  # Enable detailed output
+    manager_llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7),
+    process=Process.hierarchical,
+    verbose=True
 )
 
 # Streamlit UI for inputs
 st.subheader("Set Parameters for Trading Crew")
 
 # Input fields for the user to specify parameters
-stock_selection = st.text_input("Stock Selection", "MSFT")  # Default stock is MSFT
-initial_capital = st.number_input("Initial Capital", value=100000, step=1000)  # Default initial capital
-risk_tolerance = st.selectbox("Risk Tolerance", ["Low", "Medium", "High"])  # User selects risk tolerance level
-trading_strategy_preference = st.selectbox("Trading Strategy Preference", ["Day Trading", "Swing Trading", "Long-term Investment"])  # User selects trading strategy
-news_impact_consideration = st.checkbox("Consider News Impact", value=True)  # Option to consider news impact
+stock_selection = st.text_input("Stock Selection", "MSFT")
+initial_capital = st.number_input("Initial Capital", value=100000, step=1000)
+risk_tolerance = st.selectbox("Risk Tolerance", ["Low", "Medium", "High"])
+trading_strategy_preference = st.selectbox("Trading Strategy Preference", ["Day Trading", "Swing Trading", "Long-term Investment"])
+news_impact_consideration = st.checkbox("Consider News Impact", value=True)
 
 # Function to run the crew and display the result
 def run_trading_crew():
@@ -148,7 +158,7 @@ def run_trading_crew():
             result = financial_trading_crew.kickoff(inputs=financial_trading_inputs)
             return result
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            st.error(f"An error occurred while executing the trading crew: {e}")
             return None
 
 # Execution button to run the trading crew

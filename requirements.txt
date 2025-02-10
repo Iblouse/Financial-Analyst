@@ -1,8 +1,7 @@
 crewai==0.28.8
 crewai_tools==0.1.6
-#tools
 langchain_community==0.0.29
-streamlit
+streamlit==1.42.0
+python-dotenv==1.0.0
 google-generativeai
-python-dotenv
-langchain 
+langchain
